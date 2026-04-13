@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans:    'Figtree', system-ui, sans-serif;
+  --font-display: 'Sora', system-ui, sans-serif;
+
+  --text-xs:   0.75rem;
+  --text-xs--line-height:     1rem;
+  --text-xs--letter-spacing:  0.01875rem;
+  --text-sm:   0.875rem;
+  --text-sm--line-height:     1.25rem;
+  --text-sm--letter-spacing:  0.01563rem;
+  --text-base: 1rem;
+  --text-base--line-height:   1.375rem;
+  --text-base--letter-spacing: 0.0125rem;
+  --text-lg:   1.125rem;
+  --text-lg--line-height:     1.625rem;
+  --text-lg--letter-spacing:  0rem;
+  --text-xl:   1.25rem;
+  --text-xl--line-height:     1.75rem;
+  --text-xl--letter-spacing:  -0.00625rem;
+  --text-2xl:  1.5rem;
+  --text-2xl--line-height:    2rem;
+  --text-2xl--letter-spacing: -0.0125rem;
+  --text-3xl:  1.875rem;
+  --text-3xl--line-height:    2.25rem;
+  --text-3xl--letter-spacing: -0.0125rem;
+  --text-4xl:  2.25rem;
+  --text-4xl--line-height:    2.5rem;
+  --text-4xl--letter-spacing: -0.025rem;
+  --text-5xl:  3rem;
+  --text-5xl--line-height:    3rem;
+  --text-5xl--letter-spacing: -0.025rem;
+
+  /* BRAND — fill in from the Modern Woodmen brand guide */
+  --color-brand:     #000000; /* TODO: MW primary brand color */
+  --color-brand-97:  #F2F2F2; /* TODO: lightest tint */
+  --color-brand-93:  #E0E0E0; /* TODO */
+  --color-brand-88:  #C8C8C8; /* TODO */
+  --color-brand-74:  #A0A0A0; /* TODO */
+  --color-brand-n10: #000000; /* TODO: dark -10L */
+  --color-brand-n20: #000000; /* TODO: dark -20L */
+  --color-brand-n30: #000000; /* TODO: dark -30L */
+
+  /* NEUTRAL */
+  --color-neutral-50:  #F8FAFC;
+  --color-neutral-100: #F2F5F8;
+  --color-neutral-200: #E3E8EF;
+  --color-neutral-300: #CED5DF;
+  --color-neutral-400: #9AA6B6;
+  --color-neutral-500: #687587;
+  --color-neutral-600: #485568;
+  --color-neutral-700: #364152;
+  --color-neutral-800: #1F293A;
+  --color-neutral-900: #111828;
+  --color-neutral-950: #020617;
+
+  /* RED */
+  --color-red-50:  #FEF2F2;
+  --color-red-100: #FEE6E6;
+  --color-red-500: #ED4646;
+  --color-red-600: #DC2626;
+  --color-red-700: #B91C1C;
+  --color-red-800: #991B1B;
+
+  /* YELLOW */
+  --color-yellow-50:  #FEFAE8;
+  --color-yellow-100: #FDF5CE;
+  --color-yellow-500: #F0BD05;
+  --color-yellow-700: #B7750B;
+  --color-yellow-800: #975812;
+
+  /* GREEN */
+  --color-green-50:  #E8FCF7;
+  --color-green-100: #D1FAF0;
+  --color-green-500: #25BB96;
+  --color-green-600: #149F7E;
+  --color-green-700: #14856A;
+  --color-green-800: #156A58;
+}
+
+/* MOBILE SHELL — 390px phone frame centered in browser for desktop preview */
+html, body {
+  height: 100%;
+  margin: 0;
+  background-color: #E3E8EF;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 390px;
+  height: 100%;
+  margin: 0 auto;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* iOS keyframes */
+@keyframes page-enter {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes sheet-enter {
+  from { opacity: 0.6; transform: translateY(100%); }
+  to   { opacity: 1;   transform: translateY(0); }
+}
+
+@keyframes sheet-exit {
+  from { transform: translateY(0); }
+  to   { transform: translateY(110%); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes status-flash {
+  0%   { background-color: #D1FAF0; }
+  60%  { background-color: #D1FAF0; }
+  100% { background-color: transparent; }
+}
