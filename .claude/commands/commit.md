@@ -1,46 +1,48 @@
 ---
-name: commit
-description: >
-  Commit staged changes, push to origin, create a PR, and output the PR URL.
-  Use whenever the user says "commit", "commit and push", "sync", or asks for a PR message.
+allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr view:*), Bash(gh pr create:*)
+description: Commit staged changes and push to both casestatus and ldemarinis-cs remotes
 ---
+
+## Context
+
+- Current git status: !`git status`
+- Current git diff (staged and unstaged changes): !`git diff HEAD`
+- Current branch: !`git branch --show-current`
+- Recent commits: !`git log --oneline -5`
+- Configured push remotes: !`git remote -v`
+
+## Your task
 
 Follow these steps exactly, in order.
 
-## Step 1 — Gather context
+### Step 1 — Stage and commit
 
-Run these in parallel:
-- `git status` — identify modified/untracked files
-- `git diff` — review all staged and unstaged changes
-- `git log --oneline -5` — understand recent commit message style
-
-## Step 2 — Stage and commit
-
-Stage only the relevant source files (never `.env`, secrets, or binaries). Do not use `git add -A` or `git add .` — add files by name.
+Stage only relevant source files (never `.env`, secrets, or large binaries). Do not use `git add -A` or `git add .` — add files by name.
 
 Write a commit message that:
 - Uses conventional commit prefixes: `feat:`, `fix:`, `refactor:`, `docs:`, `chore:`
 - Summarizes the *why*, not just the *what*
-- Is concise (1–2 sentences max in the body if needed)
-- Always ends with the co-author trailer
+- Is concise (1-2 sentences max)
+- Always ends with this trailer:
 
-## Step 3 — Push to origin
+  Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+
+### Step 2 — Push to both remotes
+
+This repo is configured with two push URLs on `origin`:
+- `https://github.com/casestatus/modern-woodmen-mobile.git` (primary — Case Status)
+- `https://github.com/ldemarinis-cs/modern-woodmen-mobile.git` (personal mirror)
+
+A single `git push` reaches both simultaneously. Run:
 
 ```bash
 git push --set-upstream origin HEAD
 ```
 
-## Step 4 — Create PR
-
-Check first whether a PR already exists — if one does, output the URL and stop.
+### Step 3 — PR check
 
 ```bash
-gh pr view --repo casestatus/modern-woodmen-mobile 2>/dev/null \
-  || gh pr create --repo casestatus/modern-woodmen-mobile \
-       --title "<PR title under 70 chars>" \
-       --body "..."
+gh pr view 2>/dev/null || echo "No PR — committed directly to main"
 ```
 
-Output the PR URL so the user can open it directly.
-
-The summary bullets should cover *what changed and why*. The test plan should be specific and checkable — not generic boilerplate.
+Output a one-line confirmation with the commit SHA and confirm both remotes received the push.
