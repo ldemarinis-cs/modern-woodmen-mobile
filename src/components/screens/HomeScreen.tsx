@@ -5,6 +5,7 @@ import { TabBar } from '../layout/TabBar'
 import { ApplicationStatusSummary, StageCarousel } from '../shared/ApplicationStageTracker'
 import { ChevronRightIcon } from '@heroicons/react/24/outline'
 import woodmenIcon from '../../assets/woodmen-icon.svg'
+import woodmenPrairie from '../../assets/woodmen-prarie.svg'
 
 // ─── Mock data ────────────────────────────────────────────────────────────────
 // NOTE: No policy data shown while application is in review — policy does not
@@ -73,7 +74,7 @@ export function HomeScreen() {
 
           {/* Decorative: prairie SVG — bottom-right, low opacity */}
           <img
-            src="src/assets/woodmen-prarie.svg"
+            src={woodmenPrairie}
             alt=""
             aria-hidden="true"
             className="absolute -bottom-12 -right-12 pointer-events-none"
