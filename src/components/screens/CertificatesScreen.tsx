@@ -1,7 +1,7 @@
 import { StatusBar } from '../layout/StatusBar'
 import { NavBar } from '../layout/NavBar'
 import { TabBar } from '../layout/TabBar'
-import { DocumentTextIcon } from '@heroicons/react/24/outline'
+import { DocumentTextIcon, DocumentMagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
 // ─── Screen ────────────────────────────────────────────────────────────────────
 
@@ -33,16 +33,20 @@ export function CertificatesScreen() {
 
           {/* Status callout */}
           <div className="w-full bg-white border border-neutral-200 text-left px-4 py-4 mt-2">
-            <div className="flex items-start gap-3">
-              <div className="w-2 h-2 rounded-full bg-brand mt-1.5 shrink-0" />
-              <div>
-                <p className="font-sans font-semibold text-sm text-neutral-800 leading-5">
-                  Application in review
-                </p>
-                <p className="font-sans text-sm text-neutral-500 leading-5 mt-0.5">
-                  Whole Life Insurance · $250,000 coverage
-                </p>
-              </div>
+            <p className="font-sans text-sm font-semibold text-neutral-500 leading-4 tracking-[0.2px] mb-1">
+              Coverage Requested
+            </p>
+            <p className="font-display font-semibold text-4xl text-neutral-800 leading-10 tracking-tight">
+              $250,000
+            </p>
+            <p className="font-sans text-sm text-neutral-500 leading-5 mt-1">
+              Whole Life Insurance
+            </p>
+            <div className="flex items-center gap-1.5 mt-3 pt-3 border-t border-neutral-100">
+              <DocumentMagnifyingGlassIcon className="w-4 h-4 text-brand shrink-0" />
+              <span className="font-sans font-semibold text-xs text-brand leading-4">
+                Application in review
+              </span>
             </div>
           </div>
 

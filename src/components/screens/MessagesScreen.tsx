@@ -97,7 +97,7 @@ function MessageBubble({ message }: { message: Message }) {
           </div>
 
           {/* Timestamp */}
-          <span className="font-sans text-[10px] text-neutral-400 leading-3 mx-2">
+          <span className={`font-sans text-[10px] text-neutral-400 leading-3 mx-2 ${isUser ? 'text-right' : 'text-left'}`}>
             {message.time}
           </span>
 
@@ -131,11 +131,12 @@ export function MessagesScreen() {
       </div>
 
       {/* Compose bar — sits above tab bar */}
-      <div className="bg-white border-t border-neutral-200 px-4 py-3 flex items-center gap-3">
-        <button className="flex items-center justify-center w-[44px] h-[44px] text-neutral-400 active:opacity-70 transition-opacity shrink-0">
-          <PlusCircleIcon className="w-6 h-6" />
-        </button>
-        <div className="flex-1 bg-neutral-100 border border-neutral-200 px-4 py-2 flex items-center min-h-[44px]">
+      <div className=" px-4 py-3 flex items-center gap-3">
+
+        <div className="flex-1 bg-white border border-neutral-200 px-2 py-2 gap-2 flex items-center min-h-[44px]">
+          <button className="flex items-center justify-center w-[32px] h-[32px] text-neutral-400 active:opacity-70 transition-opacity">
+            <PlusCircleIcon className="w-6 h-6" />
+          </button>
           <input
             type="text"
             value={input}
@@ -143,14 +144,15 @@ export function MessagesScreen() {
             placeholder="Message your representative..."
             className="flex-1 bg-transparent font-sans text-sm text-neutral-800 placeholder:text-neutral-400 outline-none leading-5"
           />
-        </div>
-        <button
+          <button
           className={`flex items-center justify-center w-[44px] h-[44px] shrink-0 transition-opacity ${input.trim() ? 'text-brand active:opacity-70' : 'text-neutral-300'
             }`}
           disabled={!input.trim()}
         >
           <PaperAirplaneIcon className="w-6 h-6" />
         </button>
+        </div>
+        
       </div>
 
       <TabBar />

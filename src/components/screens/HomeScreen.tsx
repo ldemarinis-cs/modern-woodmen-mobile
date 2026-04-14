@@ -94,7 +94,7 @@ export function HomeScreen() {
                 Good morning, James
               </p>
               <span className="inline-flex items-center gap-1.5 mt-2 px-2 py-1 bg-white/10 border border-white/20">
-                <img src={woodmenIcon} alt="" aria-hidden="true" className="w-3.5 h-3.5 shrink-0 opacity-70" />
+                <img src={woodmenIcon} alt="" aria-hidden="true" className="w-4 h-4 shrink-0 opacity-70" />
                 <span className="font-sans text-xs text-white/70 leading-none tracking-[0.2px]">
                   Member since 2026
                 </span>
@@ -103,7 +103,7 @@ export function HomeScreen() {
 
             {/* Block 2 — what they applied for */}
             <div>
-              <p className="font-sans font-medium text-white/80 leading-5 mb-1">
+              <p className="text-sm font-sans font-semibold text-white/90 leading-5 mb-1">
                 Coverage Requested
               </p>
               <p className="font-display font-semibold text-4xl text-white leading-10 tracking-tight">
