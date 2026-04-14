@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans:    'Figtree', system-ui, sans-serif;
-  --font-display: 'Sora', system-ui, sans-serif;
+  --font-sans:    'myriad-pro', 'Myriad Pro', system-ui, sans-serif;
+  --font-display: 'myriad-pro', 'Myriad Pro', system-ui, sans-serif;
 
   --text-xs:   0.75rem;
   --text-xs--line-height:     1rem;
@@ -32,15 +32,22 @@
   --text-5xl--line-height:    3rem;
   --text-5xl--letter-spacing: -0.025rem;
 
-  /* BRAND — fill in from the Modern Woodmen brand guide */
-  --color-brand:     #000000; /* TODO: MW primary brand color */
-  --color-brand-97:  #F2F2F2; /* TODO: lightest tint */
-  --color-brand-93:  #E0E0E0; /* TODO */
-  --color-brand-88:  #C8C8C8; /* TODO */
-  --color-brand-74:  #A0A0A0; /* TODO */
-  --color-brand-n10: #000000; /* TODO: dark -10L */
-  --color-brand-n20: #000000; /* TODO: dark -20L */
-  --color-brand-n30: #000000; /* TODO: dark -30L */
+  /* BRAND — Modern Woodmen primary steel blue (derived from website screenshots) */
+  --color-brand:     #1B6090;
+  --color-brand-97:  #EDF4FA;
+  --color-brand-93:  #CCE0F0;
+  --color-brand-88:  #A8CCDF;
+  --color-brand-74:  #6DAAC8;
+  --color-brand-n10: #155070;
+  --color-brand-n20: #0E3D57;
+  --color-brand-n30: #082B3E;
+
+  /* MW accent green — CTA buttons, links, active states */
+  --color-mw-green:     #336B21;
+  --color-mw-green-97:  #EDF5E8;
+  --color-mw-green-93:  #D0E8C4;
+  --color-mw-green-light: #4A8020;
+  --color-mw-green-dark:  #2A5718;
 
   /* NEUTRAL */
   --color-neutral-50:  #F8FAFC;
@@ -70,33 +77,65 @@
   --color-yellow-700: #B7750B;
   --color-yellow-800: #975812;
 
-  /* GREEN */
-  --color-green-50:  #E8FCF7;
-  --color-green-100: #D1FAF0;
-  --color-green-500: #25BB96;
-  --color-green-600: #149F7E;
-  --color-green-700: #14856A;
-  --color-green-800: #156A58;
+  /* GREEN — aligned to MW forest green */
+  --color-green-50:  #EEF5E9;
+  --color-green-100: #D0E8C4;
+  --color-green-500: #4A8020;
+  --color-green-600: #3D7018;
+  --color-green-700: #336B21;
+  --color-green-800: #2A5718;
 }
 
-/* MOBILE SHELL — 390px phone frame centered in browser for desktop preview */
-html, body {
+/* Utility: hide scrollbars while keeping scroll functionality */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Hide all scrollbars globally — rely on scroll wheel / trackpad like native mobile */
+::-webkit-scrollbar { display: none; }
+* { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* MW accent green utility aliases */
+.bg-mw-green       { background-color: var(--color-mw-green); }
+.bg-mw-green-97    { background-color: var(--color-mw-green-97); }
+.bg-mw-green-93    { background-color: var(--color-mw-green-93); }
+.bg-mw-green-dark  { background-color: var(--color-mw-green-dark); }
+.text-mw-green     { color: var(--color-mw-green); }
+.text-mw-green-light { color: var(--color-mw-green-light); }
+.border-mw-green   { border-color: var(--color-mw-green); }
+
+/* MOBILE SHELL — iPhone 16 Pro (393 × 852pt) centered in browser for desktop preview */
+html {
   height: 100%;
+}
+
+body {
+  min-height: 100%;
   margin: 0;
-  background-color: #E3E8EF;
+  background-color: #d0d5dd;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 0;
+  box-sizing: border-box;
 }
 
 #root {
-  width: 390px;
-  height: 100%;
-  margin: 0 auto;
+  width: 393px;
+  height: 852px;
   background: #fff;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  border-radius: 48px;
+  /* Phone bezel — dark titanium ring + drop shadow */
+  box-shadow:
+    0 0 0 10px #2a2a2a,
+    0 0 0 11px #444,
+    0 0 0 13px #1a1a1a,
+    0 40px 100px rgba(0, 0, 0, 0.45);
 }
 
 /* iOS keyframes */
