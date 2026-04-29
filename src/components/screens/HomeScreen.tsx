@@ -1,11 +1,13 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { StatusBar } from '../layout/StatusBar'
 import { NavBar } from '../layout/NavBar'
 import { TabBar } from '../layout/TabBar'
 import { ApplicationStatusSummary, StageCarousel } from '../shared/ApplicationStageTracker'
-import { ChevronRightIcon } from '@heroicons/react/24/outline'
+import { ChevronRightIcon, XMarkIcon, PhoneIcon } from '@heroicons/react/24/outline'
 import woodmenIcon from '../../assets/woodmen-icon.svg'
 import woodmenPrairie from '../../assets/woodmen-prarie.svg'
+import sarahMitchell from '../../assets/sarah-mitchell.png'
 
 // ─── Mock data ────────────────────────────────────────────────────────────────
 // NOTE: No policy data shown while application is in review — policy does not
@@ -39,8 +41,10 @@ function SectionHeader({ title, onSeeAll }: { title: string; onSeeAll?: () => vo
 // ─── Screen ────────────────────────────────────────────────────────────────────
 
 export function HomeScreen() {
+  const navigate = useNavigate()
   const scrollRef = useRef<HTMLDivElement>(null)
   const [scrolled, setScrolled] = useState(false)
+  const [repBannerDismissed, setRepBannerDismissed] = useState(false)
 
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     setScrolled(e.currentTarget.scrollTop > 24)
@@ -49,6 +53,10 @@ export function HomeScreen() {
   const scrollToTop = () => {
     scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
   }
+
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ top: 0 })
+  }, [])
 
   return (
     <div className="flex flex-col h-full bg-neutral-100">
@@ -90,7 +98,7 @@ export function HomeScreen() {
           <div className="relative">
 
             {/* Block 1 — who */}
-            <div className="mb-6">
+            <div className="mb-4">
               <p className="font-sans font-semibold text-xl text-white leading-7">
                 Good morning, James
               </p>
@@ -101,6 +109,39 @@ export function HomeScreen() {
                 </span>
               </span>
             </div>
+
+            {/* ── Rep reassignment banner — inside hero ────────────────────── */}
+            {!repBannerDismissed && (
+              <div className="bg-white shadow-[0px_4px_16px_rgba(0,0,0,0.18)] px-3 py-3 mb-5 flex items-center gap-3">
+                {/* Photo avatar */}
+                <img
+                  src={sarahMitchell}
+                  alt="Sarah Mitchell"
+                  className="w-12 h-12 rounded-full object-cover object-top shrink-0"
+                />
+
+                {/* Info */}
+                <div className="flex-1 min-w-0">
+                  <p className="font-sans font-semibold text-xs text-brand leading-4">Meet your new advisor</p>
+                  <p className="font-sans font-semibold text-sm text-neutral-800 leading-5">
+                    Sarah Mitchell
+                  </p>
+                  <div className="flex items-center gap-1 mt-0.5">
+                    <PhoneIcon className="w-3 h-3 text-neutral-400 shrink-0" />
+                    <p className="font-sans text-xs text-neutral-500 leading-4">(555) 234-5678 · Started Apr 20</p>
+                  </div>
+                </div>
+
+                {/* Dismiss */}
+                <button
+                  onClick={() => setRepBannerDismissed(true)}
+                  aria-label="Dismiss"
+                  className="flex items-center justify-center w-[44px] h-[44px] text-neutral-400 active:opacity-70 transition-opacity shrink-0 -mr-1"
+                >
+                  <XMarkIcon className="w-4 h-4" />
+                </button>
+              </div>
+            )}
 
             {/* Block 2 — what they applied for */}
             <div>
@@ -130,11 +171,12 @@ export function HomeScreen() {
 
         {/* ── Recent activity ─────────────────────────────────────────────── */}
         <div className="mb-4">
-          <SectionHeader title="Application Activity" onSeeAll={() => {}} />
+          <SectionHeader title="Application Activity" onSeeAll={() => navigate('/application-detail')} />
           <div className="mx-4 bg-white border border-neutral-200 overflow-hidden">
             {recentActivity.map((item, i) => (
               <button
                 key={item.id}
+                onClick={() => navigate('/application-detail')}
                 className={`w-full flex items-center gap-3 px-4 py-4 min-h-[44px] active:opacity-70 transition-opacity text-left ${
                   i < recentActivity.length - 1 ? 'border-b border-neutral-100' : ''
                 }`}

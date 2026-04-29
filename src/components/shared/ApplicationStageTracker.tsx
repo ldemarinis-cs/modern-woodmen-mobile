@@ -1,5 +1,7 @@
 import { forwardRef, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { CheckCircleIcon } from '@heroicons/react/24/solid'
+import { ClockIcon } from '@heroicons/react/24/outline'
 
 import imgApplicationSubmitted from '../../assets/stage-application-submitted.png'
 import imgUnderwritingReview   from '../../assets/stage-underwriting-review.png'
@@ -63,6 +65,7 @@ export const applicationStages: Stage[] = [
 // ─── Summary card (placed in hero overlap position) ───────────────────────────
 
 export function ApplicationStatusSummary() {
+  const navigate = useNavigate()
   const currentStage = applicationStages.find(s => s.status === 'current')
 
   return (
@@ -101,6 +104,20 @@ export function ApplicationStatusSummary() {
         ))}
         <div className="w-1 h-3 bg-neutral-300 rounded-full shrink-0" />
       </div>
+
+      {/* Blocker row — always visible, links to detail */}
+      <button
+        onClick={() => navigate('/application-detail')}
+        className="mt-3 pt-3 border-t border-neutral-100 w-full flex items-center justify-between gap-2 active:opacity-70 transition-opacity"
+      >
+        <div className="flex items-center gap-2 min-w-0">
+          <ClockIcon className="w-4 h-4 text-yellow-600 shrink-0" />
+          <p className="font-sans text-sm text-neutral-600 leading-5 truncate">
+            Waiting on <span className="font-semibold text-neutral-800">Dr. Carter's office</span>
+          </p>
+        </div>
+        <span className="font-sans text-sm text-brand leading-5 shrink-0">Details</span>
+      </button>
     </div>
   )
 }
